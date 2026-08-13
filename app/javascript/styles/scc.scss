@@ -1,0 +1,17 @@
+// Secret Clubhouse theme for Mastodon.
+//
+// `@use 'application'` pulls in the entire upstream stylesheet; everything
+// below it overrides by source order. This is the convention the official
+// theming docs and Tangerine Neue both use, and the spike of 2026-08-12
+// confirmed it still composes under 4.6 (27-byte delta vs default, exactly
+// the marker declaration).
+//
+// Order matters: fonts first so @font-face is declared before anything uses
+// the families, then upstream, then our overrides innermost-last.
+@use 'scc/fonts';
+@use 'application';
+@use 'scc/palette';
+@use 'scc/tokens';
+@use 'scc/type';
+@use 'scc/public';
+@use 'scc/errors';

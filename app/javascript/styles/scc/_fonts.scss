@@ -1,0 +1,43 @@
+// Self-hosted OFL faces. Latin subsets, same-origin, no external requests.
+//
+// Every visitor including the author sees the same type. The generic fallbacks
+// exist only for the case where a woff2 fails to load, not as part of the
+// ordinary cascade.
+//
+// font-display: swap on all of them. `block` hides text outright and
+// `optional` would leave many first-time visitors on Georgia for a whole
+// session, which defeats the point of self-hosting.
+
+@font-face {
+  font-family: 'Bodoni Moda';
+  src: url('@/fonts/scc/bodoni-moda-latin-var.woff2') format('woff2-variations');
+  font-weight: 400 900;
+  font-stretch: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Literata';
+  src: url('@/fonts/scc/literata-latin-var.woff2') format('woff2-variations');
+  font-weight: 200 900;
+  font-stretch: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Courier Prime';
+  src: url('@/fonts/scc/courier-prime-latin-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Courier Prime';
+  src: url('@/fonts/scc/courier-prime-latin-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

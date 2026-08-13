@@ -1,0 +1,16 @@
+// Oxblood rubber stamp. --scc-stamp is decorative here (the rule and the
+// rotation), but the text inside it is text, so it uses the corrected token.
+.scc-stamp {
+  display: inline-block;
+  padding: 0.2em 0.6em;
+  border: 2px solid var(--color-text-error);
+  border-radius: 2px;
+  color: var(--color-text-error);
+  font-family: var(--scc-type);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transform: rotate(-3deg);
+  opacity: 0.9;
+}

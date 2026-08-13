@@ -1,0 +1,58 @@
+// Typographic scale. Stock Mastodon is 13px chrome / 14px status / 19px
+// detailed status; serifs need more.
+
+html {
+  --scc-display: 'Bodoni Moda', Georgia, serif;
+  --scc-body: 'Literata', Georgia, serif;
+  --scc-type: 'Courier Prime', 'Courier New', monospace;
+  --scc-measure: 68ch;
+}
+
+body {
+  font-family: var(--scc-body);
+  font-size: 14px; // chrome, up from 13px
+  line-height: 1.5;
+}
+
+// Status bodies carry the reading load.
+.status__content,
+.reply-indicator__content {
+  font-size: 16px;
+  line-height: 1.55;
+  font-family: var(--scc-body);
+}
+
+.detailed-status .status__content {
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+// Display face: headings and display names only.
+h1,
+h2,
+h3,
+.display-name__html,
+.account__header__tabs__name h1,
+.column-header__title {
+  font-family: var(--scc-display);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+// Monospace: datelines, counters, stamps, code.
+.display-name__account,
+.status__relative-time,
+.detailed-status__datetime,
+.account__header__extra__links,
+code,
+pre,
+samp {
+  font-family: var(--scc-type);
+  font-variant-numeric: tabular-nums;
+}
+
+code,
+pre,
+samp {
+  font-size: 0.9em;
+}

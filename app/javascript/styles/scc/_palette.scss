@@ -1,0 +1,72 @@
+// Ramp overrides. Upstream applies `base.palette` to `html`; we re-declare the
+// same custom properties on the same selector, later in source order.
+//
+// Greys become an ink/paper ramp (50 = lightest paper, 950 = night).
+// Indigo becomes teal, red becomes oxblood, yellow becomes lamp amber, green
+// becomes a muted moss so success states stop shouting in a noir palette.
+html {
+  // Ink & paper
+  --color-grey-50: #f5f0e4;
+  --color-grey-100: #e9e1ce;
+  --color-grey-200: #dcd1b8;
+  --color-grey-300: #c9bc9e;
+  --color-grey-400: #a89c82;
+  --color-grey-500: #877c6b;
+  --color-grey-600: #60584c;
+  --color-grey-700: #4a4239;
+  --color-grey-800: #332e27;
+  --color-grey-900: #1e1b16;
+  --color-grey-950: #12151a;
+
+  // Teal (brand)
+  --color-indigo-50: #f3f6f6;
+  --color-indigo-100: #e1e9ea;
+  --color-indigo-200: #c1d5d7;
+  --color-indigo-300: #97bfc4;
+  --color-indigo-400: #69acb4;
+  --color-indigo-500: #4696a0;
+  --color-indigo-600: #397b84;
+  --color-indigo-700: #2e646b;
+  --color-indigo-800: #264f54;
+  --color-indigo-900: #1e3a3e;
+  --color-indigo-950: #132325;
+
+  // Oxblood
+  --color-red-50: #f7f3f2;
+  --color-red-100: #ede0de;
+  --color-red-200: #dfbdb9;
+  --color-red-300: #d59086;
+  --color-red-400: #d15d4d;
+  --color-red-500: #c23724;
+  --color-red-600: #9f2d1d;
+  --color-red-700: #812518;
+  --color-red-800: #651f15;
+  --color-red-900: #4a1811;
+  --color-red-950: #2d100c;
+
+  // Lamp amber
+  --color-yellow-50: #f8f6f2;
+  --color-yellow-100: #efe9dc;
+  --color-yellow-200: #e4d4b4;
+  --color-yellow-300: #debd7d;
+  --color-yellow-400: #e0a93d;
+  --color-yellow-500: #d59211;
+  --color-yellow-600: #af780e;
+  --color-yellow-700: #8e620b;
+  --color-yellow-800: #6f4d0c;
+  --color-yellow-900: #51390b;
+  --color-yellow-950: #302308;
+
+  // Moss
+  --color-green-50: #f4f5f4;
+  --color-green-100: #e4e8e3;
+  --color-green-200: #c9d2c6;
+  --color-green-300: #a7b9a2;
+  --color-green-400: #84a27c;
+  --color-green-500: #65895c;
+  --color-green-600: #53714c;
+  --color-green-700: #435c3d;
+  --color-green-800: #364932;
+  --color-green-900: #293626;
+  --color-green-950: #192117;
+}

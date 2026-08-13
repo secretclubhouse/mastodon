@@ -12,6 +12,7 @@
     = theme_style_tags Setting.default_settings['theme']
     = vite_typescript_tag 'error.ts', crossorigin: 'anonymous'
   %body.error
+    = render 'scc/chrome', force: true
     .dialog
       .dialog__illustration
         %img{ alt: Setting.default_settings['site_title'], src: '/oops.png' }/

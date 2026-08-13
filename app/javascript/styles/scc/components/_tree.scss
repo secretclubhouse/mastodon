@@ -1,0 +1,26 @@
+// The mark. Custom properties are the only channel into the <use> shadow tree,
+// so every per-instance control goes through one.
+//
+// --flicker defaults to `paused` inside the symbol (var(--flicker, paused)),
+// so a missing property fails toward no animation. We opt in here and opt back
+// out under reduced motion. A @media block in page CSS cannot reach the
+// declaration inside the symbol — only the custom property can.
+.scc-tree {
+  display: block;
+  aspect-ratio: 437 / 452; // instances carry no viewBox
+  --flicker: running;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scc-tree {
+    --flicker: paused;
+  }
+}
+
+.scc-masthead__mark {
+  width: 2.25rem;
+  --tree-ink: #e9e1ce;
+  --house-wall: #12151a;
+  --window: #f0b542;
+  --bulk: 8; // twigs need thickening at this size; see the site's tools/README.md
+}
