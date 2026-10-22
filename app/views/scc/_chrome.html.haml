@@ -1,0 +1,26 @@
+-# Rendered from the application and error layouts. Logged-out visitors only,
+-# so the logged-in app chrome is untouched beyond the token shift.
+-#
+-# force: true is passed by the error layout, and -- this is the case that
+-# matters -- by assets:generate_static_pages during `bin/rails
+-# assets:precompile`, which renders error.html.haml outside any real HTTP
+-# request. In that rake context Warden middleware is never loaded, so
+-# *calling* user_signed_in? raises Devise::MissingWarden even though
+-# respond_to?(:user_signed_in?) is true -- the method exists, it's the
+-# runtime environment that's missing, and respond_to? cannot detect that.
+-#
+-# So: check force first and never touch user_signed_in? on that path at
+-# all. On the non-forced path, rescue only Devise::MissingWarden (never a
+-# bare rescue -- that would hide real bugs too) and treat it as signed out.
+- forced = local_assigns[:force]
+- signed_in = false
+- if !forced
+  - begin
+    - signed_in = respond_to?(:user_signed_in?) && user_signed_in?
+  - rescue Devise::MissingWarden
+    - signed_in = false
+- if forced || !signed_in
+  .scc-chrome
+    = render 'scc/tree_sprite'
+    = render 'scc/masthead'
+    = render 'scc/deckle'

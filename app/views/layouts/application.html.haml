@@ -43,6 +43,7 @@
     = yield :header_tags
 
   %body{ class: body_classes }
+    = render 'scc/chrome'
     = content_for?(:content) ? yield(:content) : yield
 
     .logo-resources{ 'tabindex' => '-1', 'inert' => true, 'aria-hidden' => 'true' }
