@@ -1,0 +1,123 @@
+// Semantic token overrides. Selectors replicate
+// mastodon/theme/index.scss exactly and win on source order.
+//
+// Values are the canonical set from tokens/scc.css. Four of them are
+// CORRECTED against the design spec because the spec only checked text
+// against --color-bg-primary; these also have to survive --color-bg-secondary,
+// which is what cards, menus and dropdowns sit on.
+
+// Mark colours that do not vary by scheme. --tree-ink and --house-wall do
+// vary (they follow the scheme's ink/paper or ink/night pairing) and stay in
+// the mixins below.
+html {
+  --window: #f0b542;
+  --bulk: 2.5;
+}
+
+@mixin night-tokens {
+  --color-text-primary: #e9e1ce;
+  --color-text-secondary: rgb(233 225 206 / 55%);
+  --color-text-tertiary: rgb(233 225 206 / 55%);
+  --color-text-inverted: #12151a;
+  --color-text-brand: #f0b542;
+  --color-text-error: #d8604c;
+  --color-text-on-brand-base: #12151a;
+  --color-text-on-error-base: #e9e1ce;
+  --color-text-status-links: #f0b542;
+
+  --color-bg-primary: #12151a;
+  --color-bg-secondary: #191d24;
+  // The SCC palette defines two surfaces per scheme, not three. The text
+  // tokens already sit near the AA floor on --color-bg-secondary, so a third,
+  // darker surface has no contrast headroom: every candidate either fails AA
+  // or is visually identical to secondary. Aliasing keeps upstream's token
+  // populated and guarantees it inherits a surface the WCAG gate covers.
+  --color-bg-tertiary: var(--color-bg-secondary);
+  --color-bg-inverted: #e9e1ce;
+
+  --color-bg-brand-base: #f0b542;
+  --color-bg-error-base: #d8604c;
+
+  --color-border-primary: rgb(233 225 206 / 16%);
+  --color-border-brand: #f0b542;
+  --color-border-error: #d8604c;
+
+  // WCAG 1.4.11: interactive component boundaries need 3:1. 40%, not the
+  // spec's 38% — 38% is 2.81:1 once the control sits on --color-bg-secondary.
+  --scc-edge-interactive: rgb(233 225 206 / 40%);
+
+  // Mark colours. These are the only channel into the <use> shadow tree.
+  --tree-ink: #e9e1ce;
+  --house-wall: #12151a;
+}
+
+@mixin paper-tokens {
+  --color-text-primary: #17140f;
+  --color-text-secondary: #4a4239;
+  --color-text-tertiary: #60584c; // CORRECTED: superseded value was 3.90:1 on paper-deep
+  --color-text-inverted: #e9e1ce;
+  --color-text-brand: #28565c;
+  --color-text-error: #a52f1e; // CORRECTED (#a9301f is 4.43:1 on paper-deep)
+  --color-text-on-brand-base: #e9e1ce;
+  --color-text-on-error-base: #e9e1ce;
+  --color-text-status-links: #28565c;
+
+  --color-bg-primary: #e9e1ce;
+  --color-bg-secondary: #dcd1b8;
+  // See the equivalent comment in night-tokens: no third surface exists.
+  --color-bg-tertiary: var(--color-bg-secondary);
+  --color-bg-inverted: #17140f;
+
+  // The site's .hero__cta is amber-on-night, but it only ever appears inside a
+  // night band. Amber on cream fails 1.4.11 as a button edge, so Paper uses the
+  // link colour instead. Night keeps the site's treatment unchanged.
+  --color-bg-brand-base: #28565c;
+  --color-bg-error-base: #a52f1e;
+
+  --color-border-primary: #c9bc9e;
+  --color-border-brand: #28565c;
+  --color-border-error: #a52f1e;
+
+  --scc-edge-interactive: #84734a; // CORRECTED: superseded value was 2.61:1 on paper-deep
+
+  --tree-ink: #17140f;
+  --house-wall: #e9e1ce;
+}
+
+[data-color-scheme='dark'],
+html:not([data-color-scheme]) {
+  @include night-tokens;
+
+  &[data-contrast='high'],
+  [data-contrast='high'] & {
+    --color-text-secondary: #e9e1ce;
+    --color-text-tertiary: rgb(233 225 206 / 75%);
+    --color-border-primary: rgb(233 225 206 / 40%);
+    --scc-edge-interactive: rgb(233 225 206 / 60%);
+  }
+}
+
+[data-color-scheme='light'] {
+  @include paper-tokens;
+
+  &[data-contrast='high'],
+  [data-contrast='high'] & {
+    --color-text-primary: #000000;
+    --color-text-secondary: #17140f;
+    --color-text-tertiary: #4a4239;
+    --color-border-primary: #84734a;
+    --scc-edge-interactive: #4a4239;
+  }
+}
+
+// Interactive component boundaries. Upstream leans on --color-border-primary
+// for both rules and control edges; the decorative value is deliberately below
+// 3:1, so controls get the dedicated token.
+button,
+input,
+select,
+textarea,
+.button,
+[role='button'] {
+  --color-border-primary: var(--scc-edge-interactive);
+}

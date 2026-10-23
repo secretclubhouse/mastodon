@@ -1,0 +1,75 @@
+@use 'components/masthead';
+@use 'components/deckle';
+@use 'components/tree';
+@use 'components/stamp';
+
+// Public-surface rules, gated on our chrome being present. :has() is safe
+// here — 4.6 already ships relative colour syntax.
+body:has(> .scc-chrome) {
+  // The app claims the full viewport. When our chrome is present it no
+  // longer can, or the page scrolls by exactly the masthead's height on
+  // every load. No fallback on --scc-masthead-height: it is declared on this
+  // same selector in components/masthead, so if it is ever out of scope here
+  // again the layout breaks visibly instead of silently reusing a stale
+  // literal.
+  .app-holder,
+  .app-holder > div {
+    min-height: calc(100dvh - var(--scc-masthead-height) - 34px);
+  }
+
+  // Reading measure on the public surfaces. Serif body copy at 16px needs a
+  // bound or lines run past comfortable reading length on desktop.
+  .status__content,
+  .account__header__content,
+  .about__section__body {
+    max-width: var(--scc-measure);
+  }
+
+  // Links carry the brand colour on the public surfaces only — logged-in
+  // chrome gets the token shift and nothing more, but scc/public is always
+  // compiled in regardless of session, so this must stay scoped here.
+  a {
+    color: var(--color-text-brand);
+  }
+}
+
+// Detailed status: the single highest-traffic surface, every federated link.
+.detailed-status {
+  border-color: var(--color-border-primary);
+
+  .detailed-status__meta {
+    font-family: var(--scc-type);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    color: var(--color-text-tertiary);
+  }
+}
+
+// Profile header.
+.account__header__tabs__name {
+  h1 {
+    font-family: var(--scc-display);
+  }
+
+  small {
+    font-family: var(--scc-type);
+    color: var(--color-text-tertiary);
+  }
+}
+
+.account__header__bio {
+  font-family: var(--scc-body);
+  font-size: 16px;
+  line-height: 1.55;
+  max-width: var(--scc-measure);
+}
+
+// About page.
+.about__header__hero {
+  border: 1px solid var(--color-border-primary);
+}
+
+.about h3,
+.about h4 {
+  font-family: var(--scc-display);
+}
