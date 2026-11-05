@@ -7,8 +7,8 @@ class Themes
   include Singleton
 
   THEME_COLORS = {
-    dark: '#181820',
-    light: '#ffffff',
+    dark: '#12151A',
+    light: '#E9E1CE',
   }.freeze
 
   def initialize

@@ -1,0 +1,52 @@
+// Night masthead above the paper body, mirroring the site's opening sequence.
+//
+// Declared on the ancestor both the masthead and .app-holder share. Custom
+// properties inherit downward only, so declaring this on .scc-chrome would
+// leave it out of scope for .app-holder — a sibling — and _public.scss would
+// silently fall back instead of compensating for the real height.
+body:has(> .scc-chrome) {
+  --scc-masthead-height: 4.5rem;
+}
+
+.scc-masthead {
+  background: #12151a;
+  color: #e9e1ce;
+  border-bottom: 0;
+}
+
+.scc-masthead__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0.75rem 1.25rem;
+  min-height: var(--scc-masthead-height);
+  box-sizing: border-box;
+}
+
+.scc-masthead__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.scc-masthead__wordmark {
+  font-family: var(--scc-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.scc-masthead__dateline {
+  margin: 0;
+  font-family: var(--scc-type);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  // 55% paper on night = 4.96:1, gated by the contrast check.
+  color: rgb(233 225 206 / 55%);
+}

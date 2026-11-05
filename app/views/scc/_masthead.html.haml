@@ -1,0 +1,20 @@
+-# Night masthead with dateline, mirroring the website's opening sequence:
+-# masthead -> deckle -> paper body (the deckle render lives in _chrome, which
+-# composes the two).
+.scc-masthead{ role: 'banner' }
+  .scc-masthead__inner
+    %a.scc-masthead__brand{ href: root_path }
+      %svg.scc-tree.scc-masthead__mark{ 'aria-hidden' => 'true', focusable: 'false' }
+        %use{ href: '#scc-tree' }
+      %span.scc-masthead__wordmark= site_title
+    %p.scc-masthead__dateline
+      -# Deliberately the instance's date (server UTC), not the visitor's
+      -# local date -- this is a dateline, like a newspaper's, not a
+      -# personalised timestamp, so it should read the same for everyone
+      -# looking at the same page regardless of timezone. The trade-off: for
+      -# visitors well west of UTC it can visibly roll over mid-afternoon
+      -# their time. If fragment or CDN caching is ever added to this
+      -# partial, the cache key must be date-aware (or include the UTC date)
+      -# or this goes stale until the next cache bust.
+      %time{ datetime: Time.now.utc.strftime('%Y-%m-%d') }
+        = l(Time.now.utc.to_date, format: :long)
